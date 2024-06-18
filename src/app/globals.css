@@ -1,33 +1,85 @@
+@import url("tldraw/tldraw.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --bg: rgb(23, 23, 23);
+  --primary: rgb(40, 102, 223);
+  --bg-variable: 23, 23, 23;
+  --primary-variable: 40, 102, 223;
+  --secondary-variable: 236, 45, 64;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.tl-theme__dark {
+  --color-selected: rgb(40, 102, 223);
+  --color-panel: rgb(23, 23, 23);
+  --color-panel-contrast: rgba(255, 255, 255, 0.1);
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* 
+bg - #2866DF rgb(40, 102, 223)
+hover - #326DE1 rgb(50, 109, 225) 
+text - #ffffff rgb(255, 255, 255)
+active = #326DE1 rgb(50, 109, 225)
+ring - #245DCB rgb(36, 93, 203)
+disabled - #779AE0 rgb(119, 154, 224)
+
+*/
+.btn-primary {
+  --btn-bg-color: 40, 102, 223;
+  --btn-text-color: 255, 255, 255;
+  --btn-spinner-color: 255, 255, 255;
+  --btn-bg-hover-color: 50, 109, 225;
+  --btn-bg-active-color: 50, 109, 225;
+  --btn-ring-color: 36, 93, 203;
+  --btn-disabled-color: 119, 154, 224;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 
+bg- #EC2D40 rgb(236, 45, 64)
+hover - #EE4455 rgb(238, 68, 85)
+text - #ffffff rgb(255, 255, 255)
+active = #EE4455 rgb(238, 68, 85)
+ring - #EA1F33 rgb(234, 31, 51)
+disabled - #EDA6AD rgb(237, 166, 173)
+*/
+
+.btn-secondary {
+  --btn-bg-color: 236, 45, 64;
+  --btn-text-color: 255, 255, 255;
+  --btn-spinner-color: 255, 255, 255;
+  --btn-bg-hover-color: 238, 68, 85;
+  --btn-bg-active-color: 238, 68, 85;
+  --btn-ring-color: 234, 31, 5;
+  --btn-disabled-color: 237, 166, 173;
+}
+
+.btn-ghost {
+  --btn-bg-color: transparent;
+  --btn-text-color: 31, 41, 55;
+  --btn-spinner-color: 31, 41, 55;
+  --btn-bg-hover-color: transparent;
+  --btn-bg-active-color: transparent;
+  --btn-ring-color: 209, 213, 219;
+  --btn-disabled-color: 209, 213, 219;
+}
+
+.btn-unstyled {
+  --btn-bg-color: 255, 255, 255;
+  --btn-text-color: 0, 0, 0;
+  --btn-spinner-color: 31, 41, 55;
+  --btn-bg-hover-color: 229, 231, 235;
+  --btn-bg-active-color: 229, 231, 235;
+  --btn-ring-color: 55, 65, 81;
+  --btn-disabled-color: 229, 231, 235;
+}
+
+html {
+  background-color: var(--bg);
+}
+
+.tl-background {
+  background-color: var(--bg);
 }
