@@ -24,6 +24,10 @@ import {
   loadSnapshot,
 } from "tldraw";
 
+import Splash from "../../public/splash.png";
+import Image from "next/image";
+import { AnimatePresence, motion } from "framer-motion";
+
 let editor: Editor | null = null;
 const turing = new TuringMachine();
 
@@ -514,9 +518,51 @@ export default function Home() {
     }
   };
 
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
-    <main className="flex h-dvh w-full items-start justify-between gap-1 overflow-hidden">
-      <div className="flex h-full w-2/5 flex-col overflow-hidden border-r-2 border-white/10 bg-[var(--bg)]">
+    <main className="relative flex h-dvh w-full items-start justify-between gap-1 overflow-hidden">
+      {/* splash screen */}
+      <AnimatePresence>
+        {showSplash && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9 }}
+            className="absolute inset-0 z-[99999] flex w-full flex-col items-center justify-center bg-gradient-to-b from-[var(--bg)] to-[#232323]"
+          >
+            <div className="flex flex-col items-center justify-start">
+              <div className="flex items-center justify-start gap-3 text-4xl font-medium uppercase tracking-wider text-white">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="size-9"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M8.294 1.125h2.364c.374 0 .676.27.676.602v5.984H2.646l-.097.001V1.727c0-.333.302-.602.676-.602H5.59v3.014c0 .08.036.156.1.213a.36.36 0 00.238.088h2.028a.36.36 0 00.239-.088.286.286 0 00.099-.213zM2.646 8.96h8.708a2.448 2.448 0 010 4.895H2.646a2.448 2.448 0 110-4.895m1.761 2.44a.875.875 0 11-1.75 0 .875.875 0 011.75 0m3.473 0a.875.875 0 11-1.75 0 .875.875 0 011.75 0m2.597.874a.875.875 0 100-1.75.875.875 0 000 1.75"
+                    clipRule="evenodd"
+                  />
+                </svg>
+
+                <p>TMS</p>
+              </div>
+
+              <p className="mt-2 text-center text-xs text-white/80">
+                Turing machine simulator
+              </p>
+              <p className="mt-2 text-center text-[0.6rem] text-white/70">
+                Loading...
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* splash screen */}
+
+      <div className="relative flex h-[50dvh] w-full flex-col overflow-hidden border-r-2 border-white/10 bg-[var(--bg)] md:h-full md:w-2/5">
         <div className="flex h-full flex-1 flex-col overflow-y-auto p-5">
           <div className="flex w-full items-end justify-between">
             <div className="flex-1">
@@ -872,7 +918,7 @@ export default function Home() {
                   )}
                 </div>
                 <p className="mt-1 text-xs/5 text-white/70">
-                  You can add multiple test cases to see how you machine
+                  You can add multiple test cases to see how your machine
                   performs.
                 </p>
               </div>
@@ -1017,6 +1063,7 @@ export default function Home() {
               </div>
             )}
           </div>
+
           {(!testCases || testCases.length <= 0) && (
             <div className="flex h-full w-full flex-1 items-center justify-center">
               <svg
@@ -1043,13 +1090,14 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="fixed inset-y-0 right-0 w-3/5">
+      <div className="fixed inset-x-0 bottom-0 z-[99] h-[50dvh] md:inset-y-0 md:left-[40%] md:right-0 md:h-full md:w-3/5">
         <Tldraw
           onMount={(e) => {
             editor = e;
             e.updateInstanceState({
               isGridMode: true,
             });
+            setShowSplash(false);
           }}
           persistenceKey="TMS_STORE"
           inferDarkMode
