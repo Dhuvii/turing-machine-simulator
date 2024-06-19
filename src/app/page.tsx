@@ -3,7 +3,6 @@ import { TuringMachine } from "@/TuringMachine";
 import { Button } from "@/components/Button";
 import {
   IMachineState,
-  NextMove,
   StateType,
   States,
   TLArrowShape,
@@ -24,8 +23,6 @@ import {
   loadSnapshot,
 } from "tldraw";
 
-import Splash from "../../public/splash.png";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 let editor: Editor | null = null;
